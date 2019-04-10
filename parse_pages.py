@@ -19,7 +19,7 @@ async def worker(q):
 
                 # tree = await loop.run_in_executor(executor, html.fromstring, code)
                 tree = html.fromstring(code)
-                tree.make_links_absolute(url)
+                tree.make_links_absolute(u)
                 links = tree.xpath('//a/@href')
                 links = set(links)
 
@@ -62,4 +62,5 @@ async def main():
     await asyncio.gather(*tasks)
 
 
-loop.run_until_complete(main())
+if 'http' in url and url != '':
+    loop.run_until_complete(main())
